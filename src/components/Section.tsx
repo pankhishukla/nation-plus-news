@@ -4,10 +4,12 @@ import type { ReactNode } from "react";
 export function Section({
   title,
   href,
+  linkLabel = "See all →",
   children,
 }: {
   title: string;
   href?: string;
+  linkLabel?: string;
   children: ReactNode;
 }) {
   return (
@@ -16,7 +18,7 @@ export function Section({
         <h2>{title}</h2>
         {href && (
           <Link href={href} className="more">
-            See all →
+            {linkLabel}
           </Link>
         )}
       </div>

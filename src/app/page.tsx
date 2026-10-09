@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { Card, hrefFor } from "@/components/Card";
 import { InstagramCta, YouTubeCta } from "@/components/FollowCta";
+import { OnAir } from "@/components/OnAir";
+import { Platforms } from "@/components/Platforms";
 import { Section } from "@/components/Section";
+import { ShowCard } from "@/components/ShowCard";
+import { keyShows } from "@/lib/channel";
 import { formatDate, getFeed } from "@/lib/feed";
 
 export default async function Home() {
@@ -19,6 +23,7 @@ export default async function Home() {
 
   return (
     <>
+      <OnAir />
       <section className="hero">
         <Card item={lead} size="lg" priority />
         <ol className="headlines">
@@ -43,6 +48,14 @@ export default async function Home() {
         </Section>
       )}
 
+      <Section title="Key shows" href="/shows">
+        <div className="grid grid-shows">
+          {keyShows.map((s) => (
+            <ShowCard key={s.name} show={s} />
+          ))}
+        </div>
+      </Section>
+
       <Section title="Latest from Instagram" href={instagram.length ? "/instagram" : undefined}>
         {instagram.length ? (
           <div className="grid grid-square">
@@ -61,6 +74,10 @@ export default async function Home() {
             <Card key={v.id} item={v} />
           ))}
         </div>
+      </Section>
+
+      <Section title="Watch Nation Plus News on" href="/watch" linkLabel="Where to watch →">
+        <Platforms />
       </Section>
 
       <YouTubeCta />
